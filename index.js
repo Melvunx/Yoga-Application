@@ -21,6 +21,18 @@ const utils = {
     main.innerHTML = content;
     document.querySelector(".btn-container").innerHTML = btn;
   },
+
+  handleEventMinutes: function () {
+    document.querySelectorAll('input[type="number"]').forEach((input) => {
+      input.addEventListener("input", (e) => {
+        exerciceArray.map((exo) => {
+          if (Number(exo.pic) === parseInt(e.target.id)) {
+            exo.min = parseInt(e.target.value);
+          }
+        });
+      });
+    });
+  },
 };
 
 const page = {
@@ -46,6 +58,9 @@ const page = {
       `<ul>${exercices}</ul>`,
       "<button id='start'>Commencer maintenant <i class='far -fa-play-circle'></i></button>"
     );
+
+    utils.handleEventMinutes();
+    uti
   },
 
   routine: function () {
