@@ -33,6 +33,36 @@ const utils = {
       });
     });
   },
+
+  handleEventArrow: function () {
+    document.querySelectorAll(".arrow").forEach((arrow) => {
+      arrow.addEventListener("click", (e) => {
+        let position = 0;
+        exerciceArray.map((exo) => {
+          if (exo.pic === parseInt(e.target.dataset.pic) && position !== 0) {
+            [exerciceArray[position], exerciceArray[position - 1]] = [
+              exerciceArray[position - 1],
+              exerciceArray[position],
+            ];
+            page.lobby();
+          } else {
+            position++;
+          }
+        });
+      });
+    });
+  },
+
+  deleteItem: function () {
+    document.querySelectorAll(".deleteBtn").forEach((btn) => {
+      btn.addEventListener("click", (e) => {
+        exerciceArray = exerciceArray.filter(
+          (exo) => exo.pic !== parseInt(e.target.dataset.pic)
+        );
+        page.lobby();
+      });
+    });
+  },
 };
 
 const page = {
@@ -60,7 +90,8 @@ const page = {
     );
 
     utils.handleEventMinutes();
-    uti
+    utils.handleEventArrow();
+    utils.deleteItem();
   },
 
   routine: function () {
